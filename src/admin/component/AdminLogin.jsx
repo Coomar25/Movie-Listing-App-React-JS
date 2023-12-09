@@ -1,26 +1,20 @@
-import React, { useState } from 'react'
-import Logo from '../assets/img/logo.svg'
-import axios from "axios";
+import React from 'react'
+import Logo from '../../assets/img/logo.svg'
+import { useState } from 'react'
 import {Link, useNavigate} from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
-import { successTOast, errorToast, warningToast } from "./ToastMessage";
-import { setTokenInCookie } from '../service/TokenService';
+import {successTOast, errorToast, warningToast} from '../../component/ToastMessage';
+import axios from 'axios';
+import { setTokenInCookie } from '../../service/TokenService';
 
+const AdminLogin = () => {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const navigate =useNavigate();
 
-
-
-const SignIn = () => {
-
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
-	const navigate =useNavigate();
-
-
-
-	const handleSubmitForm = async (e) => {
-		e.preventDefault();
-		try{
-            const response = await axios.post('http://localhost:4000/auth/loginuser', {
+    const handleSubmitForm = async (e) => {
+        e.preventDefault();
+        try{
+            const response = await axios.post('http://localhost:4000/admin/login', {
                 email: email,
                 password: password
             });
@@ -33,18 +27,21 @@ const SignIn = () => {
             const user = response.data.user;
 			setTokenInCookie(token, user);
 
-			setTimeout(() => {
-				navigate('/');
-			    window.location.reload();
-			},  1500); 
+			if(!user || !token){
+                setTimeout(() => {
+                    navigate('/admin/login');
+                },  1500); 
+            }else{
+                setTimeout(() => {
+                    navigate('/admin/dashboard');
+                },  1500);
+            }
 
         }catch(error){
 			errorToast(error.message);
             console.log('Login Failed', error);
         }
-	}
-
-
+    }
   return (
 	<div className="sign section--bg" data-bg="">
 		<div className="container">
@@ -68,13 +65,10 @@ const SignIn = () => {
 							
 							<button onClick={handleSubmitForm} className="sign__btn" type="button">Sign in</button>
 
-							<span className="sign__delimiter">or</span>
 
 						
 
-							<span className="sign__text">Don't have an account?  <Link to="/signup">Sign up! </Link>   </span>
 
-							<span className="sign__text"><a href="forgot.html">Forgot password?</a></span>
 						</form>
 					</div>
 				</div>
@@ -85,4 +79,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default AdminLogin

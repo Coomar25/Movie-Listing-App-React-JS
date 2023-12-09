@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const NowShowing = () => {
+  
+
   return (
     <section className="section">
       <div className="container">
