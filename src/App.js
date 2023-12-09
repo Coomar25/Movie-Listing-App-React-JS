@@ -15,6 +15,7 @@ import { ToastContainer } from 'react-toastify';
 import Profile from './ui/Profile';
 import SIgnUp from './component/SIgnUp';
 import AdminLogin from './admin/component/AdminLogin';
+import AdminDashboard from './admin/ui/AdminDashboard';
 
 const Layout = ({ children }) => (
   <>
@@ -45,11 +46,7 @@ const router = createBrowserRouter([
 
   {
     path: "/admin/dashboard",
-    element: (
-      <Routes>
-        <Route path="/login" element={<AdminLogin />} />
-      </Routes>
-    )
+    element: ( <AdminDashboard/> )
   }
   
 ]);
