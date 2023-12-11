@@ -1,149 +1,249 @@
-import React from 'react'
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import {successTOast, errorToast } from "../../component/ToastMessage";
+
+
+
 
 const AddMovie = () => {
+  const [movieName, setMovieName] = useState("");
+  const [movieDescription, setMovieDescription] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
+  const [runningTime, setRunningTime] = useState("");
+  const [coverimage, setCoverimage] = useState("");
+  const [embeddedlinks, setEmbeddedlinks] = useState("");
+  const [selectedItemType, setSelectedItemType] = useState("");
+  const [error, setError] = useState("");
+
+
+  let releasingDate =releaseDate && new Date(releaseDate).toISOString().split("T")[0];
+
+  console.log(releasingDate);
+
+  const handleItemTypeChange = (e) => {
+    const selectedValue = e.target.id;
+
+    setSelectedItemType(
+      selectedValue === "type1" ? "1" :
+      selectedValue === "type2" ? "2" :
+      selectedValue === "type3" ? "3" :
+      selectedValue
+    );
+  };
+
+  const handleAddMovieSubmit = async (e) => {
+    e.preventDefault();
+
+	    // Basic validation
+  if (!movieName || !releaseDate || !runningTime || !coverimage || !embeddedlinks || !selectedItemType) {
+			setError("Please fill in all required fields.");
+			alert(error);
+			return;
+		  }
+
+		  try {
+			const response = await axios.post(
+			  "http://localhost:4000/movie/addmovie",
+			  {
+				movie_name: movieName,
+				movie_description: movieDescription,
+				category_id: selectedItemType,
+				embedded_links: embeddedlinks,
+				cover_image: coverimage,
+				movie_length: runningTime,
+				releasing_on: releasingDate,
+			  }
+			);
+
+			successTOast(response.data.message);
+		  }catch(error){
+			errorToast(error.message);
+		  }
+
+
+	
+// 	const alertMessage = `
+//     Movie Name: ${movieName}
+//     Movie Description: ${movieDescription}
+//     Release Date: ${releasingDate}
+//     Running Time: ${runningTime}
+//     Cover Image: ${coverimage}
+//     Embedded Links: ${embeddedlinks}
+//     category: ${selectedItemType}
+//   `;
+
+//   alert(alertMessage);
+  };
+
+
+
   return (
     <>
-				<div class="col-12">
-					<div class="main__title">
-						<h2>Add new item</h2>
-					</div>
-				</div>
+      <div class="col-12">
+        <div class="main__title">
+          <h2>Add new item</h2>
+        </div>
+      </div>
 
-				<div class="col-12">
-					<form action="add-item.html#" class="form">
-						<div class="row">
-							<div class="col-12 col-md-5 form__cover">
-								<div class="row">
-									<div class="col-12 col-sm-6 col-md-12">
-										<div class="form__img">
-											<label for="form__img-upload">Upload cover (190 x 270)</label>
-											<input id="form__img-upload" name="form__img-upload" type="file" accept=".png, .jpg, .jpeg" />
-											<img id="form__img" src="add-item.html#" alt=" " />
-										</div>
-									</div>
-								</div>
-							</div>
+      <div class="col-12">
+        <form action="add-item.html#" class="form">
+          <div class="row">
+            <div class="col-12 col-md-7 form__content">
+              <div class="row">
+                {/* movie name hai */}
+                <div class="col-12">
+                  <div class="form__group">
+                    <input
+                      type="text"
+                      value={movieName}
+                      onChange={(e) => {
+                        setMovieName(e.target.value);
+                      }}
+                      class="form__input"
+                      placeholder="Movie Name"
+                    />
+                  </div>
+                </div>
 
-							<div class="col-12 col-md-7 form__content">
-								<div class="row">
-									<div class="col-12">
-										<div class="form__group">
-											<input type="text" class="form__input" placeholder="Title" />
-										</div>
-									</div>
+                {/* movie description hai */}
+                <div class="col-12">
+                  <div class="form__group">
+                    <textarea
+                      id="text"
+                      value={movieDescription}
+                      onChange={(e) => {
+                        setMovieDescription(e.target.value);
+                      }}
+                      name="text"
+                      class="form__textarea"
+                      placeholder="Movie Description"
+                    ></textarea>
+                  </div>
+                </div>
 
-									<div class="col-12">
-										<div class="form__group">
-											<textarea id="text" name="text" class="form__textarea" placeholder="Description"></textarea>
-										</div>
-									</div>
+                {/* release date */}
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="form__group">
+                    <input
+                      type="date"
+                      value={releaseDate}
+                      onChange={(e) => {
+                        setReleaseDate(e.target.value);
+                      }}
+                      class="form__input"
+                      placeholder="Release Date"
+                    />
+                  </div>
+                </div>
 
-									<div class="col-12 col-sm-6 col-lg-3">
-										<div class="form__group">
-											<input type="text" class="form__input" placeholder="Release year" />
-										</div>
-									</div>
+                {/* running time */}
 
-									<div class="col-12 col-sm-6 col-lg-3">
-										<div class="form__group">
-											<input type="text" class="form__input" placeholder="Running timed in minutes" />
-										</div>
-									</div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                  <div class="form__group">
+                    <input
+                      type="text"
+                      value={runningTime}
+                      onChange={(e) => {
+                        setRunningTime(e.target.value);
+                      }}
+                      class="form__input"
+                      placeholder="Running timed in minutes"
+                    />
+                  </div>
+                </div>
 
-									<div class="col-12 col-sm-6 col-lg-3">
-										<div class="form__group">
-											<select class="js-example-basic-single" id="quality">
-												<option value="FullHD">FullHD</option>
-												<option value="HD">HD</option>
-											</select>
-										</div>
-									</div>
+             
 
-									<div class="col-12 col-sm-6 col-lg-3">
-										<div class="form__group">
-											<input type="text" class="form__input" placeholder="Age"/>
-										</div>
-									</div>
+                {/* Image links heres */}
+                <div class="col-12 col-lg-12">
+                  <div class="form__group form__group--link">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder="image link here"
+                      value={coverimage}
+                      onChange={(e) => {
+                        setCoverimage(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
 
-									<div class="col-12 col-lg-6">
-										<div class="form__group">
-											<select class="js-example-basic-multiple" id="country" multiple="multiple">
-												<option value="Afghanistan">Afghanistan</option>
-												
-											</select>
-										</div>
-									</div>
+            <div class="col-12">
+              <ul className="form__radio">
+                <li>
+                  <span>Item type:</span>
+                </li>
+                <li>
+                  <input
+                    id="type1"
+                    type="radio"
+                    name="type"
+                    checked={selectedItemType === "type1"}
+                    onChange={handleItemTypeChange}
+                  />
+                  <label htmlFor="type1">Now Showing</label>
+                </li>
+                <li>
+                  <input
+                    id="type2"
+                    type="radio"
+                    name="type"
+                    checked={selectedItemType === "type2"}
+                    onChange={handleItemTypeChange}
+                  />
+                  <label htmlFor="type2">Releasing</label>
+                </li>
+                <li>
+                  <input
+                    id="type3"
+                    type="radio"
+                    name="type"
+                    checked={selectedItemType === "type3"}
+                    onChange={handleItemTypeChange}
+                  />
+                  <label htmlFor="type3">Coming Soon</label>
+                </li>
+              </ul>
+            </div>
 
-									<div class="col-12 col-lg-6">
-										<div class="form__group">
-											<select class="js-example-basic-multiple" id="genre" multiple="multiple">
-												<option value="Action">Action</option>
-												<option value="Animation">Animation</option>
-												<option value="Comedy">Comedy</option>
-												<option value="Crime">Crime</option>
-												<option value="Drama">Drama</option>
-												<option value="Fantasy">Fantasy</option>
-												<option value="Historical">Historical</option>
-												<option value="Horror">Horror</option>
-												<option value="Romance">Romance</option>
-												<option value="Science-fiction">Science-fiction</option>
-												<option value="Thriller">Thriller</option>
-												<option value="Western">Western</option>
-												<option value="Otheer">Otheer</option>
-											</select>
-										</div>
-									</div>
+            {/* youtube embedded links */}
 
-									<div class="col-12">
-										<div class="form__gallery">
-											<label id="gallery1" for="form__gallery-upload">Upload photos</label>
-											<input data-name="#gallery1" id="form__gallery-upload" name="gallery" class="form__gallery-upload" type="file" accept=".png, .jpg, .jpeg" multiple />
-										</div>
-									</div>
-								</div>
-							</div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12 col-lg-12">
+                  <div class="form__group form__group--link">
+                    <input
+                      type="text"
+                      class="form__input"
+                      placeholder="or add a youtube embedded link"
+                      value={embeddedlinks}
+                      onChange={(e) => {
+                        setEmbeddedlinks(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
 
-							<div class="col-12">
-								<ul class="form__radio">
-									<li>
-										<span>Item type:</span>
-									</li>
-									<li>
-										<input id="type1" type="radio" name="type" checked=""/>
-										<label for="type1">Movie</label>
-									</li>
-									<li>
-										<input id="type2" type="radio" name="type"/>
-										<label for="type2">TV Show</label>
-									</li>
-								</ul>
-							</div>
-							
-							<div class="col-12">
-								<div class="row">
-									<div class="col-12 col-lg-6">
-										<div class="form__video">
-											<label id="movie1" for="form__video-upload">Upload video</label>
-											<input data-name="#movie1" id="form__video-upload" name="movie" class="form__video-upload" type="file" accept="video/mp4,video/x-m4v,video/*"/>
-										</div>
-									</div>
-
-									<div class="col-12 col-lg-6">
-										<div class="form__group form__group--link">
-											<input type="text" class="form__input" placeholder="or add a link"/>
-										</div>
-									</div>
-
-									<div class="col-12">
-										<button type="button" class="form__btn">publish</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
+                <div class="col-12">
+                  <button
+                    onClick={handleAddMovieSubmit}
+                    type="button"
+                    class="form__btn"
+                  >
+                    publish
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default AddMovie
+export default AddMovie;

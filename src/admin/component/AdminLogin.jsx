@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from '../../assets/img/logo.svg'
 import { useState } from 'react'
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import {successTOast, errorToast, warningToast} from '../../component/ToastMessage';
 import axios from 'axios';
 import { setTokenInCookie } from '../../service/TokenService';
@@ -33,7 +33,7 @@ const AdminLogin = () => {
                 },  1500); 
             }else{
                 setTimeout(() => {
-                    navigate('/admin/dashboard');
+                    navigate('/admin');
                 },  1500);
             }
 

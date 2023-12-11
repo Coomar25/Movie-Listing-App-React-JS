@@ -158,7 +158,7 @@ $(document).ready(function () {
 				margin: 30,
 			},
 			1200 : {
-				items: 6,
+				items: 4,
 				margin: 30,
 				dots: false,
 				mouseDrag: false,

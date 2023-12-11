@@ -1,0 +1,86 @@
+/*==============================
+	Header
+==============================*/
+.header {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #151f30;
+    z-index: 100;
+    transition: 0.5s ease;
+  }
+  .header__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    position: relative;
+    padding: 0 15px;
+  }
+  .header__logo {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+    background-color: #151f30;
+    width: 80%;
+  }
+  .header__logo img {
+    width: 80px;
+    height: auto;
+    display: block;
+  }
+  .header__btn {
+    position: absolute;
+    width: 24px;
+    height: 22px;
+    display: block;
+    right: 15px;
+    top: 24px;
+  }
+  .header__btn span {
+    position: absolute;
+    right: 0;
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 2px;
+    transition: 0.5s;
+    opacity: 1;
+  }
+  .header__btn span:first-child {
+    top: 0;
+  }
+  .header__btn span:nth-child(2) {
+    top: 10px;
+    width: 16px;
+  }
+  .header__btn span:last-child {
+    top: 20px;
+    width: 8px;
+  }
+  .header__btn--active span {
+    background-color: #2f80ed;
+  }
+  .header__btn--active span:first-child {
+    transform: rotate(45deg);
+    top: 9px;
+  }
+  .header__btn--active span:nth-child(2) {
+    opacity: 0;
+  }
+  .header__btn--active span:last-child {
+    width: 24px;
+    transform: rotate(-45deg);
+    top: 9px;
+  }
+  @media (min-width: 1200px) {
+    .header {
+      display: none;
+    }
+  }
+  

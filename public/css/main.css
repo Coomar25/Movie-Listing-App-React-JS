@@ -568,7 +568,7 @@ body::-webkit-scrollbar-thumb {
     background-color: rgba(47,128,237,0.16);
   }
   .header__menu {
-    display: none;
+    display: block;
   }
   .header__logo {
     margin-left: 0;
