@@ -84,7 +84,7 @@ const Booking = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(`http://localhost:4000/movie/getBookedSeats/${slug}/${user_id}`);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/movie/getBookedSeats/${slug}/${user_id}`);
         const bookedSeatsData = response.data;
 
         // store multiple arrays in one array

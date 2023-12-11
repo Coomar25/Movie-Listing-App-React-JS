@@ -19,6 +19,8 @@ import AdminLogin from './admin/component/AdminLogin';
 import AdminDashboard from './admin/AdminDashboard';
 import { getTokenFromCookie } from './service/TokenService';
 
+
+
 const Layout = ({ children }) => (
   <>
     <Navbar />
@@ -61,6 +63,7 @@ const App = () => {
     <div>
       <ToastContainer />
       <RouterProvider router={router} />
+      {process.env.NODE_ENV === 'development' ? process.env.REACT_APP_DEV_MODE : process.env.REACT_APP_PRO_MODE}
     </div>
   );
 };

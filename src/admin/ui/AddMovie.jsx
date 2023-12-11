@@ -45,7 +45,7 @@ const AddMovie = () => {
 
 		  try {
 			const response = await axios.post(
-			  "http://localhost:4000/movie/addmovie",
+			  `${process.env.REACT_APP_API_URL}/movie/addmovie`,
 			  {
 				movie_name: movieName,
 				movie_description: movieDescription,
@@ -90,35 +90,35 @@ const AddMovie = () => {
 
   return (
     <>
-      <div class="col-12">
-        <div class="main__title">
+      <div className="col-12">
+        <div className="main__title">
           <h2>Add new item</h2>
         </div>
       </div>
 
-      <div class="col-12">
-        <form action="add-item.html#" class="form">
-          <div class="row">
-            <div class="col-12 col-md-7 form__content">
-              <div class="row">
+      <div className="col-12">
+        <form action="add-item.html#" className="form">
+          <div className="row">
+            <div className="col-12 col-md-7 form__content">
+              <div className="row">
                 {/* movie name hai */}
-                <div class="col-12">
-                  <div class="form__group">
+                <div className="col-12">
+                  <div className="form__group">
                     <input
                       type="text"
                       value={movieName}
                       onChange={(e) => {
                         setMovieName(e.target.value);
                       }}
-                      class="form__input"
+                      className="form__input"
                       placeholder="Movie Name"
                     />
                   </div>
                 </div>
 
                 {/* movie description hai */}
-                <div class="col-12">
-                  <div class="form__group">
+                <div className="col-12">
+                  <div className="form__group">
                     <textarea
                       id="text"
                       value={movieDescription}
@@ -126,22 +126,22 @@ const AddMovie = () => {
                         setMovieDescription(e.target.value);
                       }}
                       name="text"
-                      class="form__textarea"
+                      className="form__textarea"
                       placeholder="Movie Description"
                     ></textarea>
                   </div>
                 </div>
 
                 {/* release date */}
-                <div class="col-12 col-sm-6 col-lg-3">
-                  <div class="form__group">
+                <div className="col-12 col-sm-6 col-lg-3">
+                  <div className="form__group">
                     <input
                       type="date"
                       value={releaseDate}
                       onChange={(e) => {
                         setReleaseDate(e.target.value);
                       }}
-                      class="form__input"
+                      className="form__input"
                       placeholder="Release Date"
                     />
                   </div>
@@ -149,15 +149,15 @@ const AddMovie = () => {
 
                 {/* running time */}
 
-                <div class="col-12 col-sm-6 col-lg-3">
-                  <div class="form__group">
+                <div className="col-12 col-sm-6 col-lg-3">
+                  <div className="form__group">
                     <input
                       type="text"
                       value={runningTime}
                       onChange={(e) => {
                         setRunningTime(e.target.value);
                       }}
-                      class="form__input"
+                      className="form__input"
                       placeholder="Running timed in minutes"
                     />
                   </div>
@@ -166,11 +166,11 @@ const AddMovie = () => {
              
 
                 {/* Image links heres */}
-                <div class="col-12 col-lg-12">
-                  <div class="form__group form__group--link">
+                <div className="col-12 col-lg-12">
+                  <div className="form__group form__group--link">
                     <input
                       type="text"
-                      class="form__input"
+                      className="form__input"
                       placeholder="image link here"
                       value={coverimage}
                       onChange={(e) => {
@@ -182,8 +182,8 @@ const AddMovie = () => {
               </div>
             </div>
 
-            <div class="col-12">
-              <ul className="form__radio">
+            <div className="col-12">
+              <ul classNameName="form__radio">
                 <li>
                   <span>Item type:</span>
                 </li>
@@ -222,13 +222,13 @@ const AddMovie = () => {
 
             {/* youtube embedded links */}
 
-            <div class="col-12">
-              <div class="row">
-                <div class="col-12 col-lg-12">
-                  <div class="form__group form__group--link">
+            <div className="col-12">
+              <div className="row">
+                <div className="col-12 col-lg-12">
+                  <div className="form__group form__group--link">
                     <input
                       type="text"
-                      class="form__input"
+                      className="form__input"
                       placeholder="or add a youtube embedded link"
                       value={embeddedlinks}
                       onChange={(e) => {
@@ -238,11 +238,11 @@ const AddMovie = () => {
                   </div>
                 </div>
 
-                <div class="col-12">
+                <div className="col-12">
                   <button
                     onClick={handleAddMovieSubmit}
                     type="button"
-                    class="form__btn"
+                    className="form__btn"
                   >
                     publish
                   </button>

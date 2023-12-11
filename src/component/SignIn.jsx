@@ -20,7 +20,7 @@ const SignIn = () => {
 	const handleSubmitForm = async (e) => {
 		e.preventDefault();
 		try{
-            const response = await axios.post('http://localhost:4000/auth/loginuser', {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/loginuser`, {
                 email: email,
                 password: password
             });

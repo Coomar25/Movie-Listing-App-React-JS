@@ -12,7 +12,7 @@ const MovieDetail = () => {
     const fetchMovieData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/movie/getmovie/${slug}`
+          `${process.env.REACT_APP_API_URL}/movie/getmovie/${slug}`
         );
         setMovieData(response.data); // Assuming the API returns the movie data
         console.log("response.data", response.data);
@@ -44,8 +44,8 @@ const MovieDetail = () => {
                     fill="none"
                     stroke="currentColor"
                     stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     <rect x="3" y="5" width="18" height="14" rx="2" ry="2" />
                     <line x1="3" y1="10" x2="21" y2="10" />
