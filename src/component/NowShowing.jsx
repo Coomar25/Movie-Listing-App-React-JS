@@ -54,6 +54,12 @@ const NowShowing = () => {
                       <img
                         src={movie.cover_image}
                         alt=""
+                        style={
+                          {
+                           width: "250px",
+                           height: "350px",
+                          }
+                        }
                       />
                       <svg
                         width="22"

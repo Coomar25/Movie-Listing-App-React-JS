@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import {successTOast, errorToast } from "../../component/ToastMessage";
+import {successTOast, errorToast, warningToast} from "../../component/ToastMessage";
 
 
 
@@ -38,7 +38,8 @@ const AddMovie = () => {
 	    // Basic validation
   if (!movieName || !releaseDate || !runningTime || !coverimage || !embeddedlinks || !selectedItemType) {
 			setError("Please fill in all required fields.");
-			alert(error);
+			warningToast(error);
+			// alert(error);
 			return;
 		  }
 
@@ -57,6 +58,15 @@ const AddMovie = () => {
 			);
 
 			successTOast(response.data.message);
+
+			setMovieName("");
+			setMovieDescription("");
+			setReleaseDate("");
+			setRunningTime("");
+			setCoverimage("");
+			setEmbeddedlinks("");
+			setSelectedItemType("");
+
 		  }catch(error){
 			errorToast(error.message);
 		  }
