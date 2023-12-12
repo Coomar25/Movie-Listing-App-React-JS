@@ -1,0 +1,82 @@
+README
+This document provides information about the Node.js and React.js application with a MySQL backend.
+
+Table of Contents:
+
+About the Project
+Setup Instructions
+API Documentation
+Routes
+Request Body and Response Format
+Authentication
+Development Report
+Key Design Decisions
+Challenges Faced
+Lessons Learned
+Conclusion
+About the Project
+This application is a full-stack web application built with Node.js for the backend and React.js for the frontend. It uses a MySQL database for data persistence.
+
+Setup Instructions
+Prerequisites:
+
+Nodejs (version 14 or later)
+npm (Node Package Manager)
+MySQL Server
+A text editor or IDE (Visual Studio Code, Sublime Text, etc.)
+Installation:
+
+Clone the project repository.
+Open a terminal in the project directory.
+Install the project dependencies:
+npm install
+Create a .env file in the project root directory and add the following environment variables:
+APP_PORT=<port number>
+DB_HOST=<database host>
+DB_USER=<database user>
+DB_PASSWORD=<database password>
+DB_NAME=<database name>
+CORS_URL=<allowed origin for CORS>
+Replace <port number> with the desired port number for the application (default is 5000).
+Replace <database host>, <database user>, <database password>, and <database name> with your MySQL database credentials.
+Replace <allowed origin for CORS> with the origin you want to allow access to the API (e.g., "http://localhost:3000").
+Run the application:
+npm start
+Database Setup:
+
+Create a database with the name specified in the .env file.
+(Optional) Import any necessary SQL scripts to create tables and populate them with initial data.
+API Documentation
+Routes
+The application provides several API endpoints for various functionalities.
+
+Route	Description	Methods
+/	User routes (e.g., get all users)	GET, POST, PUT, DELETE
+/auth	User authentication routes	POST
+/admin	Admin authentication routes	POST
+/admin/movie	Manage movies (CRUD operations)	GET, POST, PUT, DELETE
+Note: This is just a basic overview of the routes. For detailed information about each route's functionality and parameters, refer to the comments within the code.
+
+Request Body and Response Format
+All requests and responses will be in JSON format. The specific structure of the request body and response will depend on the specific API endpoint.
+
+Authentication
+Some routes require authentication. The authentication mechanism is based on JSON Web Tokens (JWT). To access protected routes, you need to include a valid JWT token in the Authorization header of your request. For details on how to obtain and use JWT tokens, refer to the relevant sections of the code.
+
+Development Report
+This section provides a brief overview of the key design decisions made during development, the challenges faced, and the lessons learned.
+
+Key Design Decisions
+Modular Architecture: The application is divided into separate modules for different functionalities, such as user management, authentication, and movie management. This makes the code more maintainable and easier to test.
+Express.js framework: This framework is used to build a RESTful API for the application. It provides features such as routing, middleware, and error handling, simplifying API development.
+MySQL Database: This database is used for data persistence due to its popularity and scalability.
+Challenges Faced
+Database connection and error handling: Setting up the database connection and handling potential errors required careful implementation and testing.
+Security and authentication: Implementing secure user authentication and authorization was a major challenge, involving best practices for JWT-based authentication.
+Testing: Writing comprehensive unit and integration tests for all API endpoints and functionalities was crucial and time-consuming.
+Lessons Learned
+Planning and documentation: Thorough planning and documentation helped avoid roadblocks and ensure well-organized, easily understood code.
+Testing and debugging: Comprehensive testing and effective debugging techniques were essential for identifying and fixing bugs early in development.
+Security considerations: Careful attention to security throughout development is crucial, including user authentication, data encryption, and vulnerability management.
+Conclusion
+This application demonstrates the development of a full-stack web application with Node.js, React.js, and MySQL. 
